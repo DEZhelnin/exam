@@ -1,0 +1,69 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+int vvod(int** mas, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			mas[i][j] = rand() % 10;
+		}
+	}
+	return 0;
+}
+int viy(int** mas, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+		   cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+int vsun(int** mas, int n, int m) {
+	int jMin = 0;
+	int min = mas[0][0];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (min > mas[i][j]) {
+				min = mas[i][j];
+				jMin = j;
+			}
+		}
+	}
+	return (jMin);
+}
+int vsun1(int** mas, int n, int m) {
+	int jMax = 0;
+	int max = mas[0][0];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (max < mas[i][j]) {
+				max = mas[i][j];
+				jMax = j;	
+			}
+		}
+	}
+	return (jMax);
+}
+int main() {
+	setlocale(LC_ALL, "Rus");
+	srand(time(0));
+	int n, m;
+	cin >> n >> m;
+	int** mas = new int* [n];
+	for (int i = 0; i < n; i++) {
+		mas[i] = new int[m];
+	}
+	vvod(mas, n, m);
+	viy(mas, n, m);
+	int jMin = vsun(mas, n, m);
+	int jMax = vsun1(mas, n, m);
+	for (int i = 0; i < n; i++) {
+		swap(mas[i][jMin], mas[i][jMax]);
+	}
+  cout<<"=================================================================="<<endl;
+	viy(mas, n, m);
+	for (int i = 0; i < m; i++) {
+		delete[] mas[i];
+	}
+	delete[]mas;
+}
