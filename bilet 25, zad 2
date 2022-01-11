@@ -1,0 +1,52 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+int vvod(int** mas, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			mas[i][j] = rand() % 10;
+		}
+	}
+	return 0;
+}
+int viy(int** mas, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			 cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+int count(int** mas, int n, int m) {
+	int k = 0;
+	for (int j = 0; j < m ; j++) {
+	    int z=n;
+	    
+	    
+	    for (int i = 0; i <n-1; i++){
+			if (mas[i][j] >= mas[i+1][j])z--;
+		}
+		if (z == 1)k++;
+	}
+	return k;
+}
+
+int main() {
+	setlocale(LC_ALL, "Rus");
+	srand(time(0));
+	int n, m;
+	cin >> n >> m;
+	int** mas = new int* [n];
+	for (int i = 0; i < n; i++) {
+		mas[i] = new int[m];
+	}
+	vvod(mas, n, m);
+	viy(mas, n, m);
+	int kolvo = count(mas, n, m);
+	cout << kolvo << endl;
+	for (int i = 0; i < m; i++) {
+		delete[] mas[i];
+	}
+	delete[]mas;
+}
