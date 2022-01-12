@@ -1,0 +1,32 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
+int main ()
+{ 
+ifstream ifin ("inputtext.txt",ios::in);
+if (!ifin) {
+cout <<"File inputtext.txt ne naiden"<<endl;
+return 1;
+}
+ifin.seekg(0, ios::end); // перемещ.позицию чтения на последн.символ
+long leng= ifin.tellg();
+char *buf_t=new char[leng +1]; // на 1 байт больше,чтобы записать 0-символ
+ifin.seekg(0,ios::beg);
+ifin.read(buf_t,leng);
+buf_t[leng +1]='\0';
+long nkav=-1,i=0; 
+while (buf_t[i]) {
+if(buf_t[i]=='"') {
+if (nkav==-1) // признак первой кавычки (начала цитаты)
+nkav=i ; // позиция первой кавычки
+else // вторая кавычка
+{ 
+for(long j=nkav; j<=i; j++)
+cout<<buf_t[j];
+cout<<"\n";
+nkav=-1; // подготовка к поиску следующей цитаты
+} }
+i++; 
+}
+return 0;
+}
