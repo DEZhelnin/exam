@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+setlocale(LC_ALL, "Rus");
+ifstream fin("file.txt");
+if (fin.is_open() == NULL) {
+cout « "ощибка";
+return -1;
+}
+int x, sum = 0;
+while (!fin.eof()) {
+fin » x;
+sum += x;
+}
+fin.close();
+fstream fout("file.txt");
+if (fout.is_open() == NULL) {
+cout « "ощибка";
+return -1;
+}
+fout.seekg(0, ios_base::end);
+fout«sum;
+}
