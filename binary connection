@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+ofstream ah;
+ifstream oh;
+ah.open("t.txt", ios_base::binary);
+if (ah.is_open()) {
+int val = 12312;
+ah.write((const char*)&val,sizeof(val));
+
+ah.close();
+}
+else {
+cout « "not opened"«endl;
+ah.close();
+}
+oh.open("t.txt", ios_base::binary);
+if (oh.is_open()) {
+int h;
+oh.read((char*)&h, sizeof(h));
+cout « h;
+}
+oh.close();
+}
