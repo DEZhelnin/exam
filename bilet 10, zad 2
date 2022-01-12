@@ -18,6 +18,17 @@ int viy(int** mas, int n) {
 	}
 	return 0;
 }
+int zero(int** mas, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if ((i >= j) || (i + j >= n - 1)) {
+				mas[i][j] = 0;
+
+			}
+		}
+	}
+	return 0;
+}
 int main() {
 	setlocale(LC_ALL, "Rus");
 	srand(time(0));
@@ -29,14 +40,8 @@ int main() {
 	}
 	vvod(mas, n);
 	viy(mas, n);
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if ((i >= j)|| (i + j >= n - 1)) {
-				mas[i][j] = 0;
-				
-			}
-		}
-	}
+	zero(mas, n);
+	cout << "==========================================" << endl;
 	viy(mas, n);
 	for (int i = 0; i < n; i++) {
 		delete[] mas[i];
