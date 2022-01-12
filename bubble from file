@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int bubble(int* mas, int size) {
+for (int j = 0; j < size; j++) {
+for (int t = 0; t < size - 1; t++) {
+if (mas[t] < mas[t + 1]) { swap(mas[t], mas[t + 1]); }
+}
+}
+return 0;
+}
+int main() {
+setlocale(LC_ALL, "Rus");
+fstream fin("file.txt");
+if (fin.is_open() == NULL) {
+cout « "error";
+return -1;
+}
+int n = 100;
+int* mas = new int[n];
+int x;
+int k = 0;
+while (!fin.eof()) {
+fin » x;
+mas[k] = x;
+k++;
+}
+fin.close();
+fstream fout("output.txt");
+if (fout.is_open() == NULL) {
+cout « "error";
+return -1;
+}
+
+bubble(mas, k);
+for (int i = 0; i < k; i++) {
+fout « mas[i]«" ";
+}
+}
