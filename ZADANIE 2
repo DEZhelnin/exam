@@ -1,0 +1,57 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int m;
+int n;
+int viy(int** mas, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+int count(int** mas, int n, int m) {
+	int k = 0;
+	for (int i = 0; i < n; i++) {
+		int z = m;
+		for (int j = 0; j < m - 1; j++) {
+			if (mas[i][j] <= mas[i][j + 1])z--;
+		}
+		if (z == 1)k++;
+	}
+	return k;
+}
+int cleaning(int** mas, int n, int m) {
+	for (int i = 0; i < m; i++) {
+		delete[] mas[i];
+	}
+	return 0;
+}
+int main() {
+	cin >> n >> m;
+	ifstream file_in;
+	file_in.open("text.txt");
+	if (file_in.is_open()) {
+		cout << "file has been opened for reading"<<endl;
+		int** arr = new int* [m];
+		for (int i = 0; i < m; i++) {
+			arr[i] = new int[n];
+		}
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				file_in >> arr[i][j];
+			}
+		}
+		viy(arr, n, m);
+		int k=count(arr, n, m);
+		cout << "=====================================================" << endl;
+		cout << k << endl;
+		cleaning(arr, n, m);
+	}
+	else {
+		cout << "file hasnt been opened as reading file" << endl;
+	}
+ file_in.close();
+}
